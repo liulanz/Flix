@@ -22,7 +22,8 @@
         android:layout_marginStart="5dp"
         android:layout_toEndOf="@+id/ivPoster"
         android:text="@string/wonder_woman_1984"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:transitionName="title"/>
 
     <TextView
         android:id="@+id/tvOverview"
