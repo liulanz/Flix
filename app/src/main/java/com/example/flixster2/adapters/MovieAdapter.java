@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.flixster2.DetailActivity;
 import com.example.flixster2.MainActivity;
@@ -95,8 +96,10 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
             int margin = 10; // crop margin, set to 0 for corners with no crop
             Glide.with(context).load(imageUrl)
                    .placeholder(R.drawable.progress_bar)
-                     .transform(new RoundedCornersTransformation(radius, margin))
+                    .transform(new FitCenter(), new RoundedCornersTransformation(radius, margin))
                     .into(ivPoster);
+
+
 
             // 1.Register click listener on the whole row
             // 2. Navigate to a new activity on tap
@@ -108,13 +111,14 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
                     // open a new activity
                     Intent i = new Intent (context, DetailActivity.class);
                     i.putExtra("movie", Parcels.wrap(movie));
-//                    i.putExtra(DetailActivity.EXTRA_CONTACT, contact);
+                   // i.putExtra(DetailActivity.EXTRA_CONTACT, contact);
                     ActivityOptionsCompat options = ActivityOptionsCompat.
                             makeSceneTransitionAnimation((Activity) context, tvTitle, "title");
                     // android doesn't recognize movie object by default
                     // we need to make movie object to parcelable through a library
 
                     context.startActivity(i, options.toBundle());
+
                 }
             });
         }

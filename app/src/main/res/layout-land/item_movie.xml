@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contianer"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -24,6 +24,18 @@
         android:text="@string/wonder_woman_1984"
         android:textSize="24sp"
         android:transitionName="title"/>
+    <ImageView
+        android:id="@+id/imagePlayIcon"
+        android:layout_margin="50dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignLeft="@id/ivPoster"
+        android:layout_alignTop="@id/ivPoster"
+        android:layout_alignBottom="@id/ivPoster"
+        android:layout_alignRight="@id/ivPoster"
+        android:layout_gravity="center"
+        android:scaleType="centerInside"
+        android:src="@drawable/yt_icon_rgb" />
 
     <TextView
         android:id="@+id/tvOverview"
