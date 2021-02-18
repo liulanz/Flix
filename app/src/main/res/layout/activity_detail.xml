@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/player"
@@ -17,7 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Wonder Woman 1984"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:transitionName="title"
+
+        />
 
     <RatingBar
         android:id="@+id/ratingBar"

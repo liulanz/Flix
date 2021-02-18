@@ -1,10 +1,13 @@
 package com.example.flixster2.adapters;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,10 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.flixster2.DetailActivity;
+import com.example.flixster2.MainActivity;
 import com.example.flixster2.R;
 import com.example.flixster2.models.Movie;
 
@@ -33,6 +39,7 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
         this.context= context;
         this.movies = movies;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -92,12 +99,20 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
 //                    Toast.makeText(context, movie.getTitle() ,Toast.LENGTH_SHORT).show();
                     // open a new activity
                     Intent i = new Intent (context, DetailActivity.class);
+                    i.putExtra("movie", Parcels.wrap(movie));
+//                    i.putExtra(DetailActivity.EXTRA_CONTACT, contact);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation((Activity) context, tvTitle, "title");
                     // android doesn't recognize movie object by default
                     // we need to make movie object to parcelable through a library
-                    i.putExtra("movie", Parcels.wrap(movie));
-                    context.startActivity(i);
+
+                    context.startActivity(i, options.toBundle());
                 }
             });
         }
     }
+
+
+
+
 }
