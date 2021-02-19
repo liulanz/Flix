@@ -5,14 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.transition.Fade;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.example.flixster2.adapters.MovieAdapter;
+import com.example.flixster2.adapters.MultiViewHolderMoiveAdapter;
 import com.example.flixster2.models.Movie;
 
 import org.json.JSONArray;
@@ -37,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView rvMovies = findViewById(R.id.rvMovies);
         movies = new ArrayList<>();
         // Create the adapter
-        MovieAdapter movieAdapter= new MovieAdapter(this, movies);
+        MultiViewHolderMoiveAdapter movieAdapter= new MultiViewHolderMoiveAdapter(this, movies);
+                //new MovieAdapter(this, movies);
 
         // Set the adapter on the recycler view
         rvMovies.setAdapter(movieAdapter);
