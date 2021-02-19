@@ -71,6 +71,7 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
         TextView tvTitle;
         TextView tvOverview;
         ImageView ivPoster;
+        ImageView ivIcon;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
@@ -78,6 +79,7 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
             container = itemView.findViewById(R.id.container);
+            ivIcon = itemView.findViewById(R.id.imagePlayIcon);
 
         }
 
@@ -98,6 +100,7 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
                    .placeholder(R.drawable.progress_bar)
                     .transform(new FitCenter(), new RoundedCornersTransformation(radius, margin))
                     .into(ivPoster);
+            ivIcon.setImageResource(R.drawable.yt_icon_rgb);
 
 
 

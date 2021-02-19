@@ -4,11 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="7dp"
+    android:background="@drawable/rounded_corner"
+    >
 
     <ImageView
         android:id="@+id/ivPoster"
-        android:layout_width="350dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -19,14 +24,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/ivPoster"
         android:text="@string/wonder_woman_1984"
         android:textSize="24sp"
-        android:transitionName="title"/>
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:transitionName="title" />
     <ImageView
         android:id="@+id/imagePlayIcon"
-        android:layout_margin="50dp"
+        android:layout_margin="60dp"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_alignLeft="@id/ivPoster"
@@ -35,16 +43,18 @@
         android:layout_alignRight="@id/ivPoster"
         android:layout_gravity="center"
         android:scaleType="centerInside"
-        android:src="@drawable/yt_icon_rgb" />
+        />
 
     <TextView
         android:id="@+id/tvOverview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
-        android:layout_marginStart="5dp"
-        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivPoster"
-        android:text="@string/wonder_woman_comes_into_conflict_with_the_soviet_union_during_the_cold_war_in_the_1980s_and_finds_a_formidable_foe_by_the_name_of_the_cheetah" />
+        android:fontFamily="sans-serif-condensed"
+        android:text="overview"
+        android:textSize="16sp" />
 </RelativeLayout>
