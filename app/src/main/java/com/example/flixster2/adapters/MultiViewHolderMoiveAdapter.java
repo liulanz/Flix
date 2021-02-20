@@ -128,7 +128,11 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
                 // open a new activity
                 Intent i = new Intent(context, DetailActivity.class);
                 i.putExtra("movie", Parcels.wrap(movie));
-                context.startActivity(i);
+//                    i.putExtra(DetailActivity.EXTRA_CONTACT, contact);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation((Activity) context, vh1.binding.tvTitle, "title");
+
+                context.startActivity(i, options.toBundle());
 
             });
             vh1.getBinding().executePendingBindings();

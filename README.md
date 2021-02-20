@@ -23,12 +23,12 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 
 ### App Walkthough GIF
 
-<img src="gif_demo/flix_demo_portrait2.gif" width=250> <img src="gif_demo/flix_demo_landscape2.gif" width=500>
+<img src="gif_demo/flix_demo_portrait.gif" width=250> <img src="gif_demo/flix_demo_landscape2.gif" width=500>
 
 ### Notes
 
 I ran into some issues for the stretch stories. After adding a rounded corners for the posters and loading progress bar, the landscape orientation no longer works. I was stuck for a long time, then I realized that I had a typo.
-Recycle View is returning wrong data.
+Recycle View is returning wrong data. It turned out that it was the data from that API updated. HAHA
 
 ## Open-source libraries used
 - [Android Async HTTP](https://github.com/codepath/CPAsyncHttpClient) - Simple asynchronous HTTP requests with JSON parsing
