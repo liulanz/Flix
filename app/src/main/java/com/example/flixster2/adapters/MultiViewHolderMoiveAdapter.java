@@ -45,7 +45,7 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public int getItemViewType(int position) {
-       Log.d("getItemViewType", String.valueOf(movies.get(position).getRating() + " " + movies.get(position).getTitle()));
+      // Log.d("getItemViewType", String.valueOf(movies.get(position).getRating() + " " + movies.get(position).getTitle()));
         if(movies.get(position).getRating() >5 )
             return BIGPOSTER;
         else
