@@ -1,63 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DetailActivity"
-    android:orientation="vertical"
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    >
+    <LinearLayout
 
-    <com.google.android.youtube.player.YouTubePlayerView
-        android:id="@+id/player"
-        android:layout_width="match_parent"
-        android:layout_height="250dp" />
-
-    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:context=".DetailActivity"
+        android:orientation="vertical"
+
         >
 
-        <LinearLayout
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/player"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="250dp" />
 
-            <TextView
-                android:id="@+id/tvTitle"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:text="Wonder Woman 1984"
-                android:textSize="30sp"
-                android:fontFamily="sans-serif"
-                android:transitionName="title"
+                android:orientation="vertical" >
 
-                />
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="Wonder Woman 1984"
+                    android:textSize="30sp"
+                    android:fontFamily="sans-serif"
+                    android:transitionName="title"
 
-            <RatingBar
-                android:id="@+id/ratingBar"
-                style="@style/Widget.AppCompat.RatingBar.Indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:isIndicator="true"
-                android:numStars="10"
-                android:rating="8.5" />
+                    />
 
-            <TextView
-                android:id="@+id/tvOverview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="Wonder Woman comes into conflict with the Soviet Union during the Cold War in the 1980s and finds a formidable foe by the name of the Cheetah."
-                android:textSize="20dp" />
-        </LinearLayout>
-    </ScrollView>
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:isIndicator="true"
+                    android:numStars="10"
+                    android:rating="8.5" />
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/tvOverview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Wonder Woman comes into conflict with the Soviet Union during the Cold War in the 1980s and finds a formidable foe by the name of the Cheetah."
+                    android:textSize="20dp" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

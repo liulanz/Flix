@@ -1,10 +1,14 @@
 plugins {
     id 'com.android.application'
 }
+apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    dataBinding.enabled=true
+
 
     defaultConfig {
         applicationId "com.example.flixster2"

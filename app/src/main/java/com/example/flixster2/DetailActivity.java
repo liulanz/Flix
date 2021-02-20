@@ -1,6 +1,7 @@
 package com.example.flixster2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.transition.Fade;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.flixster2.databinding.ActivityDetailBinding;
 import com.example.flixster2.models.Movie;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -24,7 +26,9 @@ import org.parceler.Parcels;
 import okhttp3.Headers;
 
 public class DetailActivity extends YouTubeBaseActivity {
-    public static final String YOUTUBE_API_KEY ="AIzaSyCXq5Cw0yhq_5nKjDlCSb_RkO08juR0g3c";
+    private ActivityDetailBinding binding;
+
+    public static final String YOUTUBE_API_KEY = "AIzaSyCXq5Cw0yhq_5nKjDlCSb_RkO08juR0g3c";
     TextView tvTitle;
     TextView tvOverview;
     RatingBar ratingBar;
@@ -34,17 +38,15 @@ public class DetailActivity extends YouTubeBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-
-
-        tvTitle = findViewById(R.id.tvTitle);
-        tvOverview = findViewById(R.id.tvOverview);
-        ratingBar = findViewById(R.id.ratingBar);
-        youTubePlayerView = (YouTubePlayerView) findViewById(R.id.player);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
+        tvTitle = binding.tvTitle;
+        tvOverview = binding.tvOverview;
+        ratingBar = binding.ratingBar;
+        youTubePlayerView = binding.player;
         Movie movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
-        tvTitle.setText(movie.getTitle());
-        tvOverview.setText(movie.getOverview());
-        ratingBar.setRating((float)movie.getRating());
+       tvTitle.setText(movie.getTitle());
+      tvOverview.setText(movie.getOverview());
+        ratingBar.setRating((float) movie.getRating());
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(String.format(VIDEOS_URL, movie.getMovieId()), new JsonHttpResponseHandler() {
@@ -52,20 +54,20 @@ public class DetailActivity extends YouTubeBaseActivity {
             public void onSuccess(int i, Headers headers, JSON json) {
                 try {
                     JSONArray results = json.jsonObject.getJSONArray("results");
-                    if (results.length() ==0){
+                    if (results.length() == 0) {
                         return;
                     }
                     String youtubeKey = results.getJSONObject(0).getString(("key"));
                     initializeYoutube(youtubeKey);
 
                 } catch (JSONException e) {
-                    Log.d("DetailedActivity","Failed to parse JSON", e);
+                    Log.d("DetailedActivity", "Failed to parse JSON", e);
                 }
             }
 
             @Override
             public void onFailure(int i, Headers headers, String s, Throwable throwable) {
-                Log.d("DetailedActivity","onFailure");
+                Log.d("DetailedActivity", "onFailure");
             }
         });
 
@@ -76,13 +78,13 @@ public class DetailActivity extends YouTubeBaseActivity {
         youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                Log.d("DetailedActivity","onInitializationSuccess");
+//                Log.d("DetailedActivity", "onInitializationSuccess");
                 youTubePlayer.cueVideo(youtubeKey);
             }
 
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                Log.d("DetailedActivity","onInitializationFailure");
+                Log.d("DetailedActivity", "onInitializationFailure");
             }
         });
     }

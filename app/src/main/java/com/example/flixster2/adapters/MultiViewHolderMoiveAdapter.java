@@ -22,6 +22,8 @@ import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.example.flixster2.DetailActivity;
 import com.example.flixster2.MainActivity;
 import com.example.flixster2.R;
+import com.example.flixster2.databinding.LayoutViewholderBigposterBinding;
+import com.example.flixster2.databinding.LayoutViewholderSmallposterBinding;
 import com.example.flixster2.models.Movie;
 
 import org.parceler.Parcels;
@@ -149,13 +151,16 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
     public int getItemCount(){return movies.size(); }
 
     public class ViewHolderSmallPoster extends RecyclerView.ViewHolder{
+        private LayoutViewholderSmallposterBinding binding;
         private RelativeLayout container;
         private TextView tvTitle;
         private TextView tvOverview;
         private ImageView ivPoster;
         private ImageView ivIcon;
+
         public ViewHolderSmallPoster(@NonNull View itemView) {
             super(itemView);
+            binding = LayoutViewholderSmallposterBinding.bind(itemView);
             tvTitle= itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
@@ -185,11 +190,13 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
 
     }
     public class ViewHolderBigPoster extends RecyclerView.ViewHolder{
+        private LayoutViewholderBigposterBinding binding;
         private RelativeLayout container;
         private ImageView ivPoster;
         private ImageView ivIcon;
         public ViewHolderBigPoster(@NonNull View itemView) {
             super(itemView);
+            binding = LayoutViewholderBigposterBinding.bind(itemView);
             ivPoster = itemView.findViewById(R.id.ivPoster);
             container = itemView.findViewById(R.id.container);
             ivIcon = itemView.findViewById(R.id.imagePlayIcon);
