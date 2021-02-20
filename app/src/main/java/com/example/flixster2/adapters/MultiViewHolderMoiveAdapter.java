@@ -36,7 +36,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     List<Movie> movies;
-    private final int BIGPOSTER = 1, SMALLPOSTER=0;
+    private final int BIGPOSTER = 1;
 
     public MultiViewHolderMoiveAdapter(Context context, List<Movie> movies) {
         this.context= context;
@@ -45,11 +45,11 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public int getItemViewType(int position) {
-      // Log.d("getItemViewType", String.valueOf(movies.get(position).getRating() + " " + movies.get(position).getTitle()));
+       Log.d("getItemViewType", String.valueOf(movies.get(position).getRating() + " " + movies.get(position).getTitle()));
         if(movies.get(position).getRating() >5 )
             return BIGPOSTER;
         else
-            return SMALLPOSTER;
+            return 0;
     }
     @NonNull
     @Override
@@ -78,8 +78,8 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
     }
     private void configureViewBigPoster(ViewHolderBigPoster vh, int position) {
 
-        Movie movie = (Movie) movies.get(position);
-        String rating = String.valueOf(movie.getRating());
+        Movie movie =  movies.get(position);
+//        String rating = String.valueOf(movie.getRating());
 
         if (movie != null) {
 
@@ -93,22 +93,19 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
                     .transform(new FitCenter(), new RoundedCornersTransformation(radius, margin))
                     .into(vh.getIvPoster());
             vh.getIvIcon().setImageResource(R.drawable.yt_icon_rgb);
-            vh.getContainer().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // open a new activity
-                    Intent i = new Intent(context, DetailActivity.class);
-                    i.putExtra("movie", Parcels.wrap(movie));
-                    context.startActivity(i);
+            vh.getContainer().setOnClickListener(v -> {
+                // open a new activity
+                Intent i = new Intent(context, DetailActivity.class);
+                i.putExtra("movie", Parcels.wrap(movie));
+                context.startActivity(i);
 
-                }
             });
-
+            vh.getBinding().executePendingBindings();
         }
     }
 
     private void configureDefaultView(ViewHolderSmallPoster vh1, int position) {
-        Movie movie = (Movie) movies.get(position);
+        Movie movie = movies.get(position);
         String rating = String.valueOf(movie.getRating());
         if (movie != null) {
             vh1.getBinding().tvTitle.setText(movie.getTitle());
@@ -127,17 +124,14 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
                     .transform(new FitCenter(), new RoundedCornersTransformation(radius, margin))
                     .into(vh1.getIvPoster());
             vh1.getIvIcon().setImageResource(R.drawable.yt_icon_rgb);
-            vh1.getContainer().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // open a new activity
-                    Intent i = new Intent(context, DetailActivity.class);
-                    i.putExtra("movie", Parcels.wrap(movie));
-                    context.startActivity(i);
+            vh1.getContainer().setOnClickListener(v -> {
+                // open a new activity
+                Intent i = new Intent(context, DetailActivity.class);
+                i.putExtra("movie", Parcels.wrap(movie));
+                context.startActivity(i);
 
-                }
             });
-
+            vh1.getBinding().executePendingBindings();
         }
 
     }
@@ -146,8 +140,8 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public int getItemCount(){return movies.size(); }
 
-    public class ViewHolderSmallPoster extends RecyclerView.ViewHolder{
-        private LayoutViewholderSmallposterBinding binding;
+    public static class ViewHolderSmallPoster extends RecyclerView.ViewHolder{
+        private final LayoutViewholderSmallposterBinding binding;
         private RelativeLayout container;
         private TextView tvTitle;
         private TextView tvOverview;
@@ -181,9 +175,9 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
         }
 
     }
-    public class ViewHolderBigPoster extends RecyclerView.ViewHolder{
-        private LayoutViewholderBigposterBinding binding;
-        private RelativeLayout container;
+    public static class ViewHolderBigPoster extends RecyclerView.ViewHolder{
+        private final LayoutViewholderBigposterBinding binding;
+        private final RelativeLayout container;
         private ImageView ivPoster;
         private ImageView ivIcon;
         public LayoutViewholderBigposterBinding getBinding() {

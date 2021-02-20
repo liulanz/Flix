@@ -59,9 +59,9 @@ public class DetailActivity extends YouTubeBaseActivity {
                     }
                     String youtubeKey = results.getJSONObject(0).getString(("key"));
                     if (movie.getRating()>5)
-                        initializeYoutube(youtubeKey, 1);
+                        initializeYoutube(youtubeKey, true);
                     else{
-                        initializeYoutube(youtubeKey, 0);
+                        initializeYoutube(youtubeKey, false);
                     }
 
                 } catch (JSONException e) {
@@ -78,13 +78,15 @@ public class DetailActivity extends YouTubeBaseActivity {
 
     }
 
-    private void initializeYoutube(final String youtubeKey, int autoplayy) {
+    private void initializeYoutube(final String youtubeKey, boolean autoplay) {
         youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
 //                Log.d("DetailedActivity", "onInitializationSuccess");
-
-                youTubePlayer.loadVideo(youtubeKey ,autoplayy);
+                if (autoplay)
+                    youTubePlayer.loadVideo(youtubeKey ,1);
+                else
+                    youTubePlayer.cueVideo(youtubeKey);
 
             }
 
