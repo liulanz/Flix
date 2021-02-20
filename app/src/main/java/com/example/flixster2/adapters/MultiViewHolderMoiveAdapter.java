@@ -24,6 +24,7 @@ import com.example.flixster2.MainActivity;
 import com.example.flixster2.R;
 import com.example.flixster2.databinding.LayoutViewholderBigposterBinding;
 import com.example.flixster2.databinding.LayoutViewholderSmallposterBinding;
+import com.example.flixster2.databinding.LayoutViewholderSmallposterBinding;
 import com.example.flixster2.models.Movie;
 
 import org.parceler.Parcels;
@@ -35,7 +36,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     List<Movie> movies;
-    private final int BIGPOSTER = 0, SMALLPOSTER = 1;
+    private final int BIGPOSTER = 1, SMALLPOSTER=0;
 
     public MultiViewHolderMoiveAdapter(Context context, List<Movie> movies) {
         this.context= context;
@@ -44,6 +45,7 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public int getItemViewType(int position) {
+      // Log.d("getItemViewType", String.valueOf(movies.get(position).getRating() + " " + movies.get(position).getTitle()));
         if(movies.get(position).getRating() >5 )
             return BIGPOSTER;
         else
@@ -54,31 +56,24 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         RecyclerView.ViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        switch (viewType) {
-            case BIGPOSTER:
-                View v1 = inflater.inflate(R.layout.layout_viewholder_bigposter, viewGroup, false);
-                viewHolder = new ViewHolderBigPoster(v1);
-                break;
-            default:
-                View v2 = inflater.inflate(R.layout.layout_viewholder_smallposter, viewGroup, false);
-                viewHolder = new ViewHolderSmallPoster(v2);
-                break;
-
+        if (viewType == BIGPOSTER) {
+            View v1 = inflater.inflate(R.layout.layout_viewholder_bigposter, viewGroup, false);
+            viewHolder = new ViewHolderBigPoster(v1);
+        } else {
+            View v2 = inflater.inflate(R.layout.layout_viewholder_smallposter, viewGroup, false);
+            viewHolder = new ViewHolderSmallPoster(v2);
         }
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        switch (viewHolder.getItemViewType()) {
-            case BIGPOSTER:
-                ViewHolderBigPoster vh1 = (ViewHolderBigPoster) viewHolder;
-                configureViewBigPoster(vh1, position);
-                break;
-            default:
-                ViewHolderSmallPoster vh = (ViewHolderSmallPoster) viewHolder;
-                configureDefaultView(vh, position);
-                break;
+        if (viewHolder.getItemViewType() == BIGPOSTER) {
+            ViewHolderBigPoster vh1 = (ViewHolderBigPoster) viewHolder;
+            configureViewBigPoster(vh1, position);
+        } else {
+            ViewHolderSmallPoster vh = (ViewHolderSmallPoster) viewHolder;
+            configureDefaultView(vh, position);
         }
     }
     private void configureViewBigPoster(ViewHolderBigPoster vh, int position) {
@@ -116,8 +111,8 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
         Movie movie = (Movie) movies.get(position);
         String rating = String.valueOf(movie.getRating());
         if (movie != null) {
-            vh1.getTvTitle().setText(movie.getTitle());
-            vh1.getTvOverview().setText(movie.getOverview());
+            vh1.getBinding().tvTitle.setText(movie.getTitle());
+            vh1.getBinding().tvOverview.setText(movie.getOverview());
             String imageUrl;
             //landscape
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -144,6 +139,7 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
             });
 
         }
+
     }
 
 
@@ -158,26 +154,22 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
         private ImageView ivPoster;
         private ImageView ivIcon;
 
+        public LayoutViewholderSmallposterBinding getBinding() {
+            return binding;
+        }
+
         public ViewHolderSmallPoster(@NonNull View itemView) {
             super(itemView);
             binding = LayoutViewholderSmallposterBinding.bind(itemView);
-            tvTitle= itemView.findViewById(R.id.tvTitle);
-            tvOverview = itemView.findViewById(R.id.tvOverview);
-            ivPoster = itemView.findViewById(R.id.ivPoster);
-            container = itemView.findViewById(R.id.container);
-            ivIcon = itemView.findViewById(R.id.imagePlayIcon);
+            tvTitle=binding.tvTitle;
+            tvOverview =  binding.tvOverview;
+            ivPoster = binding.ivPoster;
+            container = binding.container;
+            ivIcon = binding.imagePlayIcon;
         }
 
         public RelativeLayout getContainer() {
             return container;
-        }
-
-        public TextView getTvTitle() {
-            return tvTitle;
-        }
-
-        public TextView getTvOverview() {
-            return tvOverview;
         }
 
         public ImageView getIvPoster() {
@@ -194,12 +186,15 @@ public class MultiViewHolderMoiveAdapter extends RecyclerView.Adapter<RecyclerVi
         private RelativeLayout container;
         private ImageView ivPoster;
         private ImageView ivIcon;
+        public LayoutViewholderBigposterBinding getBinding() {
+            return binding;
+        }
         public ViewHolderBigPoster(@NonNull View itemView) {
             super(itemView);
             binding = LayoutViewholderBigposterBinding.bind(itemView);
-            ivPoster = itemView.findViewById(R.id.ivPoster);
-            container = itemView.findViewById(R.id.container);
-            ivIcon = itemView.findViewById(R.id.imagePlayIcon);
+            ivPoster = binding.ivPoster;
+            container = binding.container;
+            ivIcon = binding.imagePlayIcon;
         }
 
         public RelativeLayout getContainer() {

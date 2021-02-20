@@ -34,7 +34,7 @@
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@+id/ivPoster"
             android:fontFamily="sans-serif"
-            android:text="@{movie.title}"
+            android:text="title"
             android:textSize="24sp"
             android:textStyle="bold"
             android:transitionName="title" />
@@ -63,6 +63,6 @@
             android:fontFamily="sans-serif-condensed"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/ivPoster"
-            android:text="@{movie.overview}"/>
+            android:text="overview"/>
     </RelativeLayout>
 </layout>

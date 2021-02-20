@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
         client.get(NOW_PLAYING_URL, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
-                Log.d(TAG, "onSuccess");
+              //  Log.d(TAG, "onSuccess");
                 JSONObject jsonObject= json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
-                    Log.i(TAG, "Results: "+results.toString());
+                    //Log.i(TAG, "Results: "+results.toString());
                     movies.addAll( Movie.fromJsonArray(results));
                     movieAdapter.notifyDataSetChanged();
 //                    Log.i(TAG, "Movies: "+movies.size());
